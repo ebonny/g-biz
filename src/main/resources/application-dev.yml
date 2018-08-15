@@ -1,0 +1,39 @@
+# 적용방법 : VM 에 -Dspring.profiles.active=dev 추가
+
+spring:
+  profiles: dev
+  datasource:
+    username: gportal
+    password: ENC(GlaAyuA2T0SinaWfpqRMwsHo0i/lexog)
+    url: jdbc:log4jdbc:mysql://db.esmp.co.kr:7395/gportal
+  jpa:
+    show-sql: true
+  mail:
+    default-encoding: UTF-8
+    host: smtp.gmail.com
+    port: 587
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+    username: ebonny@gmail.com
+    password: ENC(AgArn0BzDIuQNSGBoePAGUcIUYassObA)
+  mvc:
+    locale: ko
+  servlet:
+    multipart:
+      location: D:\temp
+logging:
+  path: D:\griffins\logs
+  level:
+    root: INFO
+    jdbc.sqltiming: INFO # INFO 레벨보다 크면 출력안됨
+    jdbc.resultsettable: INFO # INFO 레벨보다 크면 출력암됨 (이 로그는 쿼리결과수에 따라 엄청나게 많은 시간을 소모함)
+
+
+server:
+  port: 9090
+  upload-dir: D:\griffins\upload
+
+
+option:
+  session.max.count: 5

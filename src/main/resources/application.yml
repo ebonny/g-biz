@@ -1,0 +1,80 @@
+﻿application:
+  version: 1.0
+  title: G-Biz (Groupware by Griffins)
+
+
+mybatis:
+  config-location: classpath:config/mybatis-config.xml
+  mapper-location: classpath:mapper/*.xml
+
+
+spring:
+  profiles:
+    active: local
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    username: gportal
+    password: ENC(hhcuzrU/WTv63nUO3pDroub4CvDWVEt8)
+    url: jdbc:log4jdbc:mysql://db.esmp.co.kr:7395/gportal
+    test-on-borrow: true # CommunicationLinkFailure 방지
+    validation-query: select 1 # CommunicationLinkFailure 방지
+    test-while-idle: true # 주기적 연결체크
+    time-between-eviction-runs-millis: 60000 # 연결체크 주기
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  jackson:
+    time-zone: UTC
+
+  servlet:
+    multipart:
+      location: /home/griffins/upload/file/temp
+      max-request-size: 100MB
+      max-file-size: 100MB
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+  messages:
+    encoding: UTF-8
+  mail:
+    default-encoding: UTF-8
+    host: 127.0.0.1 # smtp.gmail.com
+    port: 25
+    #username: 인증아이디
+    #password: 인증암호
+    properties:
+      mail.smtp.auth: false
+  mvc:
+    locale: ko # jp, en ..
+
+jasypt:
+  encryptor:
+    password: ahr!@tl#$elf%^
+
+logging:
+  path: /home/esmp/logs
+  config: classpath:logback-spring.xml
+  level:
+    root: warn
+    jdbc.sqltiming: off # INFO 레벨보다 크면 출력안됨
+    jdbc.resultsettable: off
+
+
+server:
+  port: 8080
+  upload-dir: /home/esmp/upload
+
+
+option:
+  otp.use: '0'
+  otp.domain: griffins.co.kr
+  otp.site.key: 6Ld6eloUAAAAACyyhZxkRaNzCGYA0j_Jov7v0NPE # 리캡차 사용시 정의
+  otp.secret.key: 6Ld6eloUAAAAAMQ4fOGFVWZKCAfM0vUlQzj1EH_c # 리캡차 사용시 정의
+  pwd.fail.count: 5 # 5번 틀리면 로그인 불가 (4회까지는 틀려도 됨)
+  session.max.count: 1

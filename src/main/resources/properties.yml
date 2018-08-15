@@ -1,0 +1,54 @@
+
+code:
+  username.prefix: '%#usr;'
+  session.cookie.name: gs-cookie
+  ajax.header: x-requested-with
+  uncheck.session.header: x-nosession-with
+  url.home: /home.gs
+  url.login: /perform_login
+  url.loginpage: /signin.gs
+  url.logout: /logout
+  url.expired: /expired.gs
+  response.header.name: gs-response-header
+  security.param.id: gsid
+  security.param.pwd: gspwd
+  security.param.ignore: gsignore
+  security.csrf.headerName: gs-csrf-header
+  security.csrf.paramName: gs-csrf-param
+  security.csrf.attribute: '_csrf'
+  storage.id: userid
+  ask.status.ready: '0'
+  ask.status.ing: '2'
+  ask.status.no: '8'
+  ask.status.ok: '9'
+
+
+exception:
+  pages: /home.gs
+        #/xxx/list.gs
+
+
+ext:
+  image: jpeg,jpg,png,bmp,gif,ico
+  document: pdf,doc,docx,xls,xlsx,hwp,txt,ppt,pptx,log,xml
+  compress: zip,rar,7z,tar,alz,egg,cab,gz,ace
+  sound: mp3,ogg,flac,wav,wma,mid,midi,aac,ac3
+  video: avi,mp4,wmf,mpeg,mpg,asf,asx,wmv,mkv,vob,flv,mov
+  all: document,image,sound,video,compress
+  script: sh,bat,vbs
+
+
+fileupload:
+  path.common: file/common/
+  path.company: file/company/
+  path.client: file/client/
+
+
+aes:
+  key.1: 'GguYk2#37$j2jd%@7gk2Ri2#!I7qpAyp'
+  key.2: 'jG7di@djahsu@fjdks9dj2Fjdu#kdap^'
+  key.3: '0R4di#djahsuLf^dks9d!3Fjdu#uDAU#'
+  key.4: 'jduDj2%3jf@hrjdkLdjASEhfu#2h2j4K'
+  key.5: 'Oo0pYuDj2$3jf@hr8djASEhfu^2h#a5Z'
+  key.6: '9j@hsD3h8Sa27dFhJ#$jfh@f827dK!hJ'
+  key.7: 'Zgudk2#37$j2jd%j7gk2Ri2#jI7qpzXk'

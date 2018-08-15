@@ -1,0 +1,17 @@
+import mock from './mock';
+import './mail-db';
+import './todo-db';
+import './file-manager-db';
+import './contacts-db';
+import './calendar-db';
+import './invoices-db';
+import './profile-db';
+import './search-db';
+import './faq-db';
+import './knowledge-base-db';
+import './icons-db';
+import './analytics-dashboard-db';
+import './quick-panel-db';
+import './auth-db';
+import './chat-panel-db';
+mock.onAny().passThrough();
