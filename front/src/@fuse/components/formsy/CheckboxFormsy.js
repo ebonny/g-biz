@@ -1,7 +1,7 @@
 import {withFormsy} from 'formsy-react';
 import React, {Component} from 'react';
 import {Checkbox, FormControl, FormControlLabel, FormHelperText} from '@material-ui/core';
-import _ from 'lodash';
+import _ from '@lodash';
 
 class CheckboxFormsy extends Component {
 
@@ -23,7 +23,8 @@ class CheckboxFormsy extends Component {
             'indeterminateIcon',
             'inputProps',
             'inputRef',
-            'onChange'
+            'onChange',
+            'variant'
         ]);
 
         // An error message is returned only if the component is invalid

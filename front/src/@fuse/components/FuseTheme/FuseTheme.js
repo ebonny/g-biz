@@ -3,10 +3,25 @@ import {createMuiTheme, MuiThemeProvider} from '@material-ui/core';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {fuseThemesConfig} from 'fuse-configs/fuseThemesConfig';
-import _ from 'lodash';
+import _ from '@lodash';
 import {fuseDark} from '@fuse/fuse-colors';
 import lightBlue from '@material-ui/core/colors/lightBlue';
 import red from '@material-ui/core/colors/red';
+
+const defaultOptions = {
+    typography: {
+        fontFamily       : [
+            'Muli',
+            'Roboto',
+            '"Helvetica"',
+            'Arial',
+            'sans-serif'
+        ].join(','),
+        fontWeightLight  : 300,
+        fontWeightRegular: 400,
+        fontWeightMedium : 600
+    }
+};
 
 const mustHaveOptions = {
     typography: {
@@ -52,8 +67,7 @@ export let FuseSelectedTheme;
 const themesObj = Object.keys(fuseThemesConfig).length !== 0 ? fuseThemesConfig : defaults;
 
 export let themes = Object.assign({}, ...Object.entries(themesObj).map(([key, value]) => {
-
-        const muiTheme = createMuiTheme(_.merge({}, value, mustHaveOptions));
+        const muiTheme = createMuiTheme(_.merge({}, defaultOptions, value, mustHaveOptions));
 
         return {
             [key]: createMuiTheme(_.merge({}, muiTheme, {mixins: customMixins(muiTheme)}))
@@ -98,8 +112,8 @@ function updateLightDarkThemes(val)
     const theme = themesObj[val];
     themes = {
         ...themes,
-        mainThemeDark : createMuiTheme(_.merge({}, theme, {palette: {type: 'dark'}, ...mustHaveOptions})),
-        mainThemeLight: createMuiTheme(_.merge({}, theme, {palette: {type: 'light'}, ...mustHaveOptions}))
+        mainThemeDark : createMuiTheme(_.merge({}, defaultOptions, theme, {palette: {type: 'dark'}, ...mustHaveOptions})),
+        mainThemeLight: createMuiTheme(_.merge({}, defaultOptions, theme, {palette: {type: 'light'}, ...mustHaveOptions}))
     }
 }
 

@@ -29,12 +29,13 @@ import red from '@material-ui/core/colors/red';
 import moment from 'moment/moment';
 import classNames from 'classnames';
 import {FuseUtils} from '@fuse';
-import _ from 'lodash';
+import _ from '@lodash';
 
 const styles = theme => ({
     root       : {},
     formControl: {
-        marginBottom: 24
+        marginTop   : 8,
+        marginBottom: 16
     }
 });
 
@@ -169,7 +170,7 @@ class TodoDialog extends Component {
         return (
             <Dialog className={classes.root} {...todoDialog.props} onClose={this.closeTodoDialog} fullWidth maxWidth="sm">
 
-                <AppBar position="static">
+                <AppBar position="static" elevation={1}>
                     <Toolbar className="flex w-full">
                         <Typography variant="subheading" color="inherit">
                             {todoDialog.type === 'new' ? 'New Todo' : 'Edit Todo'}
@@ -243,34 +244,32 @@ class TodoDialog extends Component {
                         <Divider className="mx-24"/>
                     </div>
 
-                    <div className="flex flex-col px-24">
-                        {form.labels.length > 0 && (
-                            <div className="flex flex-wrap">
-                                {form.labels.map(label => (
-                                    <Chip
-                                        avatar={(
-                                            <Avatar
-                                                classes={{colorDefault: "bg-transparent"}}>
-                                                <Icon
-                                                    className="text-20"
-                                                    style={{color: _.find(labels, {id: label}).color}}
-                                                >
-                                                    label
-                                                </Icon>
-                                            </Avatar>
-                                        )}
-                                        label={_.find(labels, {id: label}).title}
-                                        onDelete={(ev) => this.handleToggleLabel(ev, label)}
-                                        className="mr-8 my-8"
-                                        classes={{label: "pl-4"}}
-                                        key={label}
-                                    />
-                                ))}
-                            </div>
-                        )}
-                    </div>
+                    {form.labels.length > 0 && (
+                        <div className="flex flex-wrap  px-16 sm:px-24 mb-16">
+                            {form.labels.map(label => (
+                                <Chip
+                                    avatar={(
+                                        <Avatar
+                                            classes={{colorDefault: "bg-transparent"}}>
+                                            <Icon
+                                                className="text-20"
+                                                style={{color: _.find(labels, {id: label}).color}}
+                                            >
+                                                label
+                                            </Icon>
+                                        </Avatar>
+                                    )}
+                                    label={_.find(labels, {id: label}).title}
+                                    onDelete={(ev) => this.handleToggleLabel(ev, label)}
+                                    className="mr-8 my-8"
+                                    classes={{label: "pl-4"}}
+                                    key={label}
+                                />
+                            ))}
+                        </div>
+                    )}
 
-                    <div className="p-24">
+                    <div className="px-16 sm:px-24">
                         <FormControl className={classes.formControl} required fullWidth>
                             <TextField
                                 label="Title"
@@ -279,6 +278,7 @@ class TodoDialog extends Component {
                                 value={form.title}
                                 onChange={this.handleChange}
                                 required
+                                variant="outlined"
                             />
                         </FormControl>
 
@@ -290,6 +290,7 @@ class TodoDialog extends Component {
                                 rows="6"
                                 value={form.notes}
                                 onChange={this.handleChange}
+                                variant="outlined"
                             />
                         </FormControl>
                         <div className="flex">
@@ -306,6 +307,7 @@ class TodoDialog extends Component {
                                 }}
                                 value={startDate}
                                 onChange={this.handleChange}
+                                variant="outlined"
                             />
                             <TextField
                                 name="dueDate"
@@ -320,6 +322,7 @@ class TodoDialog extends Component {
                                 }}
                                 value={dueDate}
                                 onChange={this.handleChange}
+                                variant="outlined"
                             />
                         </div>
                     </div>
@@ -327,7 +330,7 @@ class TodoDialog extends Component {
                 </DialogContent>
 
                 {todoDialog.type === 'new' ? (
-                    <DialogActions className="justify-between pl-16">
+                    <DialogActions className="justify-between pl-8 sm:pl-16">
                         <Button
                             variant="raised"
                             color="primary"
@@ -341,7 +344,7 @@ class TodoDialog extends Component {
                         </Button>
                     </DialogActions>
                 ) : (
-                    <DialogActions className="justify-between pl-16">
+                    <DialogActions className="justify-between pl-8 sm:pl-16">
                         <Button
                             variant="raised"
                             color="primary"

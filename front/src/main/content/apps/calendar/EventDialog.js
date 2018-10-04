@@ -1,19 +1,20 @@
 import React, {Component} from 'react';
 import {
-    TextField, Button, Dialog, DialogActions, DialogContent, FormControl, InputLabel, Input, Icon, IconButton, Typography, Toolbar, AppBar, FormControlLabel, Switch
+    TextField, Button, Dialog, DialogActions, DialogContent, Icon, IconButton, Typography, Toolbar, AppBar, FormControlLabel, Switch
 } from '@material-ui/core';
 import {withStyles} from '@material-ui/core/styles/index';
 import {bindActionCreators} from 'redux';
 import * as Actions from './store/actions';
 import {connect} from 'react-redux';
-import _ from 'lodash';
+import _ from '@lodash';
 import moment from 'moment';
 import FuseUtils from '@fuse/FuseUtils';
 
 const styles = theme => ({
     root       : {},
     formControl: {
-        marginBottom: 24
+        marginTop   : 8,
+        marginBottom: 16
     }
 });
 
@@ -91,11 +92,26 @@ class EventDialog extends Component {
                     </Toolbar>
                 </AppBar>
 
-                <DialogContent classes={{root: "p-24"}}>
-                    <FormControl className={classes.formControl} required fullWidth>
-                        <InputLabel htmlFor="title">Title</InputLabel>
-                        <Input autoFocus id="title" name="title" value={this.state.title} onChange={this.handleChange}/>
-                    </FormControl>
+                <DialogContent classes={{root: "p-16 pb-0 sm:p-24 sm:pb-0"}}>
+
+                    <TextField
+                        id="title"
+                        label="Title"
+                        className={classes.formControl}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
+                        inputProps={{
+                            max: end
+                        }}
+                        name="title"
+                        value={this.state.title}
+                        onChange={this.handleChange}
+                        variant="outlined"
+                        autoFocus
+                        required
+                        fullWidth
+                    />
 
                     <FormControlLabel
                         className={classes.formControl}
@@ -107,57 +123,57 @@ class EventDialog extends Component {
                             />
                         }/>
 
-                    <div className="flex">
-                        <TextField
-                            id="start"
-                            name="start"
-                            label="Start"
-                            type="datetime-local"
-                            className={classes.formControl}
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                            inputProps={{
-                                max: end
-                            }}
-                            value={start}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    <TextField
+                        id="start"
+                        name="start"
+                        label="Start"
+                        type="datetime-local"
+                        className={classes.formControl}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
+                        inputProps={{
+                            max: end
+                        }}
+                        value={start}
+                        onChange={this.handleChange}
+                        variant="outlined"
+                        fullWidth
+                    />
 
-                    <div className="flex">
-                        <TextField
-                            id="end"
-                            name="end"
-                            label="End"
-                            type="datetime-local"
-                            className={classes.formControl}
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                            inputProps={{
-                                min: start
-                            }}
-                            value={end}
-                            onChange={this.handleChange}
-                        />
-                    </div>
+                    <TextField
+                        id="end"
+                        name="end"
+                        label="End"
+                        type="datetime-local"
+                        className={classes.formControl}
+                        InputLabelProps={{
+                            shrink: true
+                        }}
+                        inputProps={{
+                            min: start
+                        }}
+                        value={end}
+                        onChange={this.handleChange}
+                        variant="outlined"
+                        fullWidth
+                    />
 
-                    <div className="flex">
-                        <TextField
-                            className={classes.formControl}
-                            id="desc" label="Description"
-                            type="text"
-                            name="desc"
-                            value={this.state.desc}
-                            onChange={this.handleChange}
-                            multiline rows={5} fullWidth
-                        />
-                    </div>
+                    <TextField
+                        className={classes.formControl}
+                        id="desc" label="Description"
+                        type="text"
+                        name="desc"
+                        value={this.state.desc}
+                        onChange={this.handleChange}
+                        multiline rows={5}
+                        variant="outlined"
+                        fullWidth
+                    />
                 </DialogContent>
 
                 {eventDialog.type === 'new' ? (
-                    <DialogActions className="justify-between pl-16">
+                    <DialogActions className="justify-between pl-8 sm:pl-16">
                         <Button
                             variant="raised"
                             color="primary"
@@ -171,7 +187,7 @@ class EventDialog extends Component {
                         </Button>
                     </DialogActions>
                 ) : (
-                    <DialogActions className="justify-between pl-16">
+                    <DialogActions className="justify-between pl-8 sm:pl-16">
                         <Button
                             variant="raised"
                             color="primary"

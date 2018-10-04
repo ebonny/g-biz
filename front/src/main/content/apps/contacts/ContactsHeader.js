@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
-import {withStyles} from '@material-ui/core/styles/index';
-import {Hidden, Icon, IconButton, TextField, Typography} from '@material-ui/core';
+import {MuiThemeProvider, withStyles} from '@material-ui/core/styles/index';
+import {Hidden, Icon, IconButton, Input, Paper, Typography} from '@material-ui/core';
 import * as Actions from './store/actions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import classNames from 'classnames';
-import {FuseAnimate} from '@fuse';
+import {FuseAnimate, FuseSelectedTheme} from '@fuse';
 
 const styles = theme => ({
     root: {}
@@ -17,9 +17,9 @@ class ContactsHeader extends Component {
     {
         const {classes, setSearchText, searchText, pageLayout} = this.props;
         return (
-            <div className={classNames(classes.root, "flex flex-1 flex-col sm:flex-row items-center justify-between p-24")}>
+            <div className={classNames(classes.root, "flex flex-1 items-center justify-between p-8 sm:p-24")}>
 
-                <div className="flex flex-1 items-center">
+                <div className="flex flex-shrink items-center sm:w-224">
                     <Hidden lgUp>
                         <IconButton
                             onClick={(ev) => pageLayout().toggleLeftSidebar()}
@@ -34,29 +34,33 @@ class ContactsHeader extends Component {
                             <Icon className="text-32 mr-12">account_box</Icon>
                         </FuseAnimate>
                         <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                            <Typography variant="title">Contacts</Typography>
+                            <Typography variant="title" className="hidden sm:flex">Contacts</Typography>
                         </FuseAnimate>
                     </div>
                 </div>
 
-                <div className="flex items-center">
+                <div className="flex flex-1 items-center justify-center pr-8 sm:px-12">
 
-                    <FuseAnimate animation="transition.expandIn" delay={300}>
-                        <Icon color="action">search</Icon>
-                    </FuseAnimate>
+                    <MuiThemeProvider theme={FuseSelectedTheme}>
+                        <FuseAnimate animation="transition.slideLeftIn" delay={300}>
+                            <Paper className="flex p-4 items-center w-full max-w-512 px-8 py-4" elevation={1}>
 
-                    <FuseAnimate animation="transition.slideLeftIn" delay={300}>
-                        <TextField
-                            placeholder="Search for anything"
-                            className="pl-16"
-                            fullWidth
-                            value={searchText}
-                            inputProps={{
-                                'aria-label': 'Search'
-                            }}
-                            onChange={setSearchText}
-                        />
-                    </FuseAnimate>
+                                <Icon className="mr-8" color="action">search</Icon>
+
+                                <Input
+                                    placeholder="Search for anything"
+                                    className="flex flex-1"
+                                    disableUnderline
+                                    fullWidth
+                                    value={searchText}
+                                    inputProps={{
+                                        'aria-label': 'Search'
+                                    }}
+                                    onChange={setSearchText}
+                                />
+                            </Paper>
+                        </FuseAnimate>
+                    </MuiThemeProvider>
                 </div>
             </div>
         )

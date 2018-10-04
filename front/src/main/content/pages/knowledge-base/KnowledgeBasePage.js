@@ -1,7 +1,19 @@
 import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles/index';
 import {
-    Button, Card, CardContent, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Icon, List, ListItem, ListItemIcon, ListItemText,
+    Button,
+    Card,
+    CardContent,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Icon,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
     Typography
 } from '@material-ui/core';
 import classNames from 'classnames';
@@ -15,9 +27,10 @@ function Transition(props)
 }
 
 const styles = theme => ({
-    root   : {},
+    root   : {
+        width: '100%'
+    },
     header : {
-        height        : 360,
         background    : "url('/assets/images/backgrounds/dark-material-bg.jpg') no-repeat",
         backgroundSize: 'cover',
         color         : '#fff'
@@ -63,10 +76,10 @@ class KnowledgeBasePage extends Component {
         return (
             <div className={classNames(classes.root)}>
 
-                <div className={classNames(classes.header, "flex flex-col items-center justify-center text-center p-24")}>
+                <div className={classNames(classes.header, "flex flex-col items-center justify-center text-center p-16 sm:p-24 h-200 sm:h-360")}>
 
                     <FuseAnimate animation="transition.slideUpIn" duration={400} delay={100}>
-                        <Typography variant="display3" color="inherit" className="font-light">
+                        <Typography color="inherit" className="text-36 sm:text-56 font-light">
                             How can we help?
                         </Typography>
                     </FuseAnimate>
@@ -84,11 +97,11 @@ class KnowledgeBasePage extends Component {
                         enter={{
                             animation: "transition.slideUpBigIn"
                         }}
-                        className="flex flex-wrap justify-center max-w-xl w-full mx-auto px-24 py-32"
+                        className="flex flex-wrap justify-center max-w-xl w-full mx-auto px-16 sm:px-24 py-32"
                     >
                         {data.map((category) => (
                             <div className="w-full max-w-512 pb-24 md:w-1/2 md:p-16" key={category.id}>
-                                <Card elevation={4}>
+                                <Card elevation={1}>
                                     <CardContent>
                                         <Typography className="font-medium px-16 pt-8" color="textSecondary">{category.title}</Typography>
                                         <List component="nav">

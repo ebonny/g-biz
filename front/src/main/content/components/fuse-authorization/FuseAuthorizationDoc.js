@@ -28,8 +28,7 @@ class FuseAuthorizationDoc extends Component {
 
                         <Typography className="mb-16" component="p">
                             <code className="language-bash">FuseAuthorization</code> is authorization component of the Fuse React. It allows to block routes based on user roles. It
-                            should
-                            wraps the FuseTheme component.
+                            should wraps the FuseTheme component.
                         </Typography>
 
                         <FuseHighlight component="pre" className="language-jsx">
@@ -113,13 +112,27 @@ class FuseAuthorizationDoc extends Component {
 
                         <Typography className="mb-16 mt-32" component="p">
                             If you don't want to set auth on every page config;
-                            You can group the configs and define authorizationon the fuseRoutesConfig.js file, like that:
+                            <br/>You can group the configs and define authorization the fuseRoutesConfig.js file,
+                            <br/>With this configuration below makes <b>whole app</b> auth protected:
                         </Typography>
 
                         <FuseHighlight component="pre" className="language-js">
                             {`
-                                    import {authRoles} from 'auth/auth';
-                                    import _ from 'lodash';
+                                    import React from 'react';
+                                    import {Redirect} from 'react-router-dom';
+                                    import {FuseUtils} from '@fuse/index';
+                                    import {appsConfigs} from 'main/content/apps/appsConfigs';
+                                    import {pagesConfigs} from 'main/content/pages/pagesConfigs';
+                                    import {authRoleExamplesConfigs} from 'main/content/auth/authRoleExamplesConfigs';
+                                    import {UserInterfaceConfig} from 'main/content/user-interface/UserInterfaceConfig';
+                                    import {ComponentsConfig} from 'main/content/components/ComponentsConfig';
+                                    import {ComponentsThirdPartyConfig} from 'main/content/components-third-party/ComponentsThirdPartyConfig';
+                                    import {GettingStartedConfig} from 'main/content/getting-started/GettingStartedConfig';
+                                    import {LoginConfig} from 'main/content/login/LoginConfig';
+                                    import {RegisterConfig} from 'main/content/register/RegisterConfig';
+                                    import {CallbackConfig} from 'main/content/callback/CallbackConfig';
+                                    import _ from '@lodash';
+                                    import {authRoles} from 'auth';
 
                                     function setAdminAuth(configs)
                                     {
@@ -137,7 +150,8 @@ class FuseAuthorizationDoc extends Component {
                                             GettingStartedConfig
                                         ]),
                                         LoginConfig,
-                                        LogoutConfig
+                                        RegisterConfig,
+                                        CallbackConfig
                                     ];
 
                                     export const routes = [
@@ -145,6 +159,10 @@ class FuseAuthorizationDoc extends Component {
                                         {
                                             path     : '/',
                                             component: () => <Redirect to="/apps/dashboards/analytics"/>
+                                        },
+                                        {
+                                            exact    : true,
+                                            component: () => <Redirect to="/pages/errors/error-404"/>
                                         }
                                     ];
                             `}

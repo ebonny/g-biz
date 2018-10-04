@@ -22,12 +22,16 @@ const propTypes = {
 const defaultProps = {};
 
 const styles = theme => ({
-    root: {
-        minHeight          : 48,
+    item: {
+        height             : 40,
+        width              : 'calc(100% - 16px)',
+        borderRadius       : '0 20px 20px 0',
+        paddingRight       : 12,
         '&.active'         : {
             backgroundColor            : theme.palette.secondary.main,
             color                      : theme.palette.secondary.contrastText + '!important',
             pointerEvents              : 'none',
+            transition                 : 'border-radius .15s cubic-bezier(0.4,0.0,0.2,1)',
             '& .list-item-text-primary': {
                 color: 'inherit'
             },
@@ -58,7 +62,7 @@ function FuseNavVerticalItem({item, classes, nestedLevel, userRole, navbarCloseM
             component={NavLink}
             to={item.url}
             activeClassName="active"
-            className={classNames(classes.root, listItemPadding)}
+            className={classNames(classes.item, listItemPadding, 'list-item')}
             onClick={navbarCloseMobile}
             exact={item.exact}
         >

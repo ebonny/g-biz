@@ -1,97 +1,62 @@
 import React, {Component} from 'react';
 import {withStyles} from '@material-ui/core/styles';
-import MailList from './MailList';
+import MailList from './mails/MailList';
 import * as Actions from './store/actions';
 import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
-import {withRouter} from 'react-router-dom'
-import MailDetails from './MailDetails';
-import {FusePageCarded, FuseScrollbars} from '@fuse';
-import classNames from 'classnames';
-import MailToolbar from './MailToolbar';
-import MailHeader from './MailHeader';
-import MailSidebarHeader from './MailSidebarHeader';
-import MailSidebarContent from './MailSidebarContent';
-import _ from 'lodash';
+import MailDetails from './mail/MailDetails';
+import {FusePageCarded} from '@fuse';
+import MailsToolbar from './mails/MailsToolbar';
+import MailToolbar from './mail/MailToolbar';
+import MailAppHeader from './MailAppHeader';
+import MailAppSidebarHeader from './MailAppSidebarHeader';
+import MailAppSidebarContent from './MailAppSidebarContent';
 
-const styles = theme => ({
-    layoutContent     : {
-        overflow     : 'hidden',
-        display      : 'flex',
-        flexDirection: 'column'
-    },
-    layoutHeader      : {
-        alignItems: 'center'
-    },
-    mailListWrapper   : {
-        borderRight                   : '1px solid ' + theme.palette.divider,
-        display                       : 'block',
-        width                         : '50%',
-        [theme.breakpoints.down('sm')]: {
-            width            : '100%',
-            '&.mail-selected': {
-                display: 'none'
-            }
-        }
-    },
-    mailDetailsWrapper: {
-        width                         : '50%',
-        [theme.breakpoints.down('sm')]: {
-            display          : 'none',
-            width            : '100%',
-            '&.mail-selected': {
-                display: 'block'
-            }
-        }
-    }
-});
+const styles = theme => ({});
 
 class MailApp extends Component {
 
     componentDidMount()
     {
-        this.props.getData(this.props.match.params);
-    }
-
-    componentDidUpdate(prevProps, prevState)
-    {
-        if ( !_.isEqual(this.props.location, prevProps.location) )
-        {
-            this.props.getMails(this.props.match.params);
-        }
+        this.props.getFilters();
+        this.props.getFolders();
+        this.props.getLabels();
     }
 
     render()
     {
-        const {classes, currentMail} = this.props;
+        const {match} = this.props;
+        const {params} = match;
 
         return (
             <FusePageCarded
                 classes={{
-                    content: classes.layoutContent,
-                    header : classes.layoutHeader
+                    root   : "w-full",
+                    content: "flex flex-col",
+                    header : "items-center min-h-72 h-72 sm:h-136 sm:min-h-136"
                 }}
                 header={
-                    <MailHeader pageLayout={() => this.pageLayout}/>
+                    <MailAppHeader pageLayout={() => this.pageLayout}/>
                 }
                 contentToolbar={
-                    <MailToolbar/>
+                    params.mailId ? (
+                        <MailToolbar/>
+                    ) : (
+                        <MailsToolbar/>
+                    )
                 }
                 content={
-                    <div className="flex flex-1 h-full">
-                        <FuseScrollbars className={classNames(classes.mailListWrapper, currentMail && "mail-selected", "overflow-auto")}>
-                            <MailList/>
-                        </FuseScrollbars>
-                        <FuseScrollbars className={classNames(classes.mailDetailsWrapper, currentMail && "mail-selected", "p-24 overflow-auto")}>
-                            <MailDetails/>
-                        </FuseScrollbars>
-                    </div>
+                    params.mailId ? (
+                        <MailDetails/>
+                    ) : (
+                        <MailList/>
+                    )
                 }
                 leftSidebarHeader={
-                    <MailSidebarHeader/>
+                    <MailAppSidebarHeader/>
                 }
                 leftSidebarContent={
-                    <MailSidebarContent/>
+                    <MailAppSidebarContent/>
                 }
                 onRef={instance => {
                     this.pageLayout = instance;
@@ -105,16 +70,10 @@ class MailApp extends Component {
 function mapDispatchToProps(dispatch)
 {
     return bindActionCreators({
-        getData : Actions.getData,
-        getMails: Actions.getMails
+        getFilters: Actions.getFilters,
+        getFolders: Actions.getFolders,
+        getLabels : Actions.getLabels
     }, dispatch);
 }
 
-function mapStateToProps({mailApp})
-{
-    return {
-        currentMail: mailApp.mails.currentMail
-    }
-}
-
-export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(MailApp)));
+export default withStyles(styles, {withTheme: true})(connect(null, mapDispatchToProps)(MailApp));

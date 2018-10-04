@@ -74,8 +74,8 @@ class ProfilePage extends Component {
                     <Tabs
                         value={value}
                         onChange={this.handleChange}
-                        indicatorColor="primary"
-                        textColor="primary"
+                        indicatorColor="secondary"
+                        textColor="secondary"
                         scrollable
                         scrollButtons="auto"
                         classes={{
@@ -98,7 +98,7 @@ class ProfilePage extends Component {
                     </Tabs>
                 }
                 content={
-                    <div className="p-24">
+                    <div className="p-16 sm:p-24">
                         {value === 0 &&
                         (
                             <TimelineTab/>

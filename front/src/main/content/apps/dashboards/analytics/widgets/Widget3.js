@@ -7,7 +7,11 @@ import {withStyles} from '@material-ui/core/styles/index';
 import classNames from 'classnames';
 
 const styles = theme => ({
-    root: {}
+    root: {
+        border   : '1px solid ' + theme.palette.divider,
+        boxShadow: 'none',
+        borderRadius: 8
+    }
 });
 
 class Widget3 extends Component {

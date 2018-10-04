@@ -9,13 +9,11 @@ import {connect} from 'react-redux';
 import * as Actions from './store/actions';
 import {Button, Icon} from '@material-ui/core';
 import EventDialog from 'main/content/apps/calendar/EventDialog';
-import {DragDropContext} from 'react-dnd'
-import HTML5Backend from 'react-dnd-html5-backend'
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import {FuseAnimate} from '@fuse';
 
-BigCalendar.setLocalizer(BigCalendar.momentLocalizer(moment));
+const localizer = BigCalendar.momentLocalizer(moment);
 
 const DragAndDropCalendar = withDragAndDrop(BigCalendar);
 
@@ -29,7 +27,7 @@ const styles = theme => ({
         flex                                                                                                           : 1,
         '& .rbc-header'                                                                                                : {
             padding   : '12px 6px',
-            fontWeight: 500,
+            fontWeight: 600,
             fontSize  : 14
         },
         '& .rbc-label'                                                                                                 : {
@@ -42,7 +40,10 @@ const styles = theme => ({
             borderBottom: '2px solid ' + theme.palette.secondary.main + '!important'
         },
         '& .rbc-month-view, & .rbc-time-view, & .rbc-agenda-view'                                                      : {
-            padding: 24,
+            padding                       : 24,
+            [theme.breakpoints.down('sm')]: {
+                padding: 16
+            },
             ...theme.mixins.border(0)
         },
         '& .rbc-agenda-view table'                                                                                     : {
@@ -115,7 +116,7 @@ const styles = theme => ({
             }
         },
         '& .rbc-event'                                                                                                 : {
-            borderRadius            : 0,
+            borderRadius            : 4,
             padding                 : '4px 8px',
             backgroundColor         : theme.palette.primary.dark,
             color                   : theme.palette.primary.contrastText,
@@ -177,7 +178,7 @@ class CalendarApp extends Component {
         });
     };
 
-    resizeEvent = (resizeType, {event, start, end}) => {
+    resizeEvent = ({event, start, end}) => {
         delete event.type;
         this.props.updateEvent({
             ...event,
@@ -193,16 +194,20 @@ class CalendarApp extends Component {
         return (
             <div className={classes.root}>
                 <DragAndDropCalendar
+                    className="flex flex-1"
                     selectable
+                    localizer={localizer}
+                    events={events}
                     onEventDrop={this.moveEvent}
                     resizable
                     onEventResize={this.resizeEvent}
-                    className="flex flex-1"
-                    events={events}
+                    defaultView={BigCalendar.Views.MONTH}
+                    defaultDate={new Date(2018, 3, 1)}
+                    startAccessor="start"
+                    endAccessor="end"
                     views={allViews}
                     step={60}
                     showMultiDayTimes
-                    defaultDate={new Date(2018, 3, 1)}
                     components={{
                         toolbar: CalendarHeader
                     }}
@@ -252,4 +257,4 @@ function mapStateToProps({calendarApp})
     }
 }
 
-export default withStyles(styles, {withTheme: true})(connect(mapStateToProps, mapDispatchToProps)(DragDropContext(HTML5Backend)(CalendarApp)));
+export default withStyles(styles, {withTheme: true})(connect(mapStateToProps, mapDispatchToProps)(CalendarApp));

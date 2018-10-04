@@ -8,7 +8,7 @@ import * as Actions from 'store/actions';
 import {AppBar, Hidden, Icon, IconButton, Toolbar, Drawer, MuiThemeProvider} from '@material-ui/core';
 import {FuseScrollbars, FuseMessage, FuseThemes} from '@fuse';
 import classNames from 'classnames';
-import _ from 'lodash';
+import _ from '@lodash';
 
 const defaultProps = {};
 
@@ -78,6 +78,7 @@ const styles = theme => ({
         flex         : '1 1 auto'
     },
     content            : {
+        position                    : 'relative',
         display                     : 'flex',
         overflow                    : 'auto',
         flex                        : '1 1 auto',
@@ -168,6 +169,12 @@ const styles = theme => ({
                 top    : 32,
                 padding: 0
             }
+        },
+        '& .list-item.active'                   : {
+            marginLeft  : 12,
+            width       : 40,
+            padding     : 12,
+            borderRadius: 20
         }
     },
     navbarHeaderWrapper: {
@@ -264,8 +271,8 @@ class FuseLayout1 extends Component {
                                 layoutConfig.navbar.folded && classes.navbarFolded,
                                 layoutConfig.navbar.folded && navbar.foldedOpen && classes.navbarFoldedOpen,
                                 layoutConfig.navbar.folded && !navbar.foldedOpen && classes.navbarFoldedClose)}
-                            onMouseEnter={navbarOpenFolded}
-                            onMouseLeave={navbarCloseFolded}
+                            onMouseEnter={() => layoutConfig.navbar.folded && !navbar.foldedOpen && navbarOpenFolded()}
+                            onMouseLeave={() => layoutConfig.navbar.folded && navbar.foldedOpen && navbarCloseFolded()}
                             style={{backgroundColor: FuseThemes[settings.theme.navbar].palette.background.default}}
                         >
                             {navbarHeaderTemplate}
@@ -352,13 +359,13 @@ class FuseLayout1 extends Component {
 
                         <div className="flex flex-1 flex-col overflow-hidden relative">
 
-                            {layoutConfig.toolbar.display && layoutConfig.toolbar.style === 'fixed' && layoutConfig.toolbar.position === 'above' && (
+                            {toolbar && layoutConfig.toolbar.display && layoutConfig.toolbar.style === 'fixed' && layoutConfig.toolbar.position === 'above' && (
                                 toolbarTemplate
                             )}
 
                             <FuseScrollbars className="overflow-auto">
 
-                                {layoutConfig.toolbar.display && layoutConfig.toolbar.style !== 'fixed' && layoutConfig.toolbar.position === 'above' && (
+                                {toolbar && layoutConfig.toolbar.display && layoutConfig.toolbar.style !== 'fixed' && layoutConfig.toolbar.position === 'above' && (
                                     toolbarTemplate
                                 )}
 
@@ -376,7 +383,7 @@ class FuseLayout1 extends Component {
                                         )}
                                     >
 
-                                        {layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'below' && (
+                                        {toolbar && layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'below' && (
                                             toolbarTemplate
                                         )}
 
@@ -386,7 +393,7 @@ class FuseLayout1 extends Component {
                                             {children}
                                         </div>
 
-                                        {layoutConfig.footer.display && layoutConfig.footer.position === 'below' && (
+                                        {footer && layoutConfig.footer.display && layoutConfig.footer.position === 'below' && (
                                             footerTemplate
                                         )}
 
@@ -399,13 +406,13 @@ class FuseLayout1 extends Component {
                                     )}
                                 </div>
 
-                                {layoutConfig.footer.display && layoutConfig.footer.style !== 'fixed' && layoutConfig.footer.position === 'above' && (
+                                {footer && layoutConfig.footer.display && layoutConfig.footer.style !== 'fixed' && layoutConfig.footer.position === 'above' && (
                                     footerTemplate
                                 )}
 
                             </FuseScrollbars>
 
-                            {layoutConfig.footer.display && layoutConfig.footer.style === 'fixed' && layoutConfig.footer.position === 'above' && (
+                            {footer && layoutConfig.footer.display && layoutConfig.footer.style === 'fixed' && layoutConfig.footer.position === 'above' && (
                                 footerTemplate
                             )}
 
@@ -429,7 +436,7 @@ class FuseLayout1 extends Component {
 
                         <div className="flex flex-1 flex-col overflow-hidden relative">
 
-                            {layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'above' && (
+                            {toolbar && layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'above' && (
                                 toolbarTemplate
                             )}
 
@@ -446,12 +453,12 @@ class FuseLayout1 extends Component {
                                         layoutConfig.navbar.display && layoutConfig.navbar.folded && layoutConfig.navbar.position === 'right' && 'lg:mr-64'
                                     )}
                                 >
-                                    {layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'below' && layoutConfig.toolbar.style === 'fixed' && (
+                                    {toolbar && layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'below' && layoutConfig.toolbar.style === 'fixed' && (
                                         toolbarTemplate
                                     )}
 
                                     <FuseScrollbars className={classes.content}>
-                                        {layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'below' && layoutConfig.toolbar.style !== 'fixed' && (
+                                        {toolbar && layoutConfig.toolbar.display && layoutConfig.toolbar.position === 'below' && layoutConfig.toolbar.style !== 'fixed' && (
                                             toolbarTemplate
                                         )}
 
@@ -460,12 +467,12 @@ class FuseLayout1 extends Component {
                                         {renderRoutes(this.props.routes)}
                                         {children}
 
-                                        {layoutConfig.footer.display && layoutConfig.footer.position === 'below' && layoutConfig.footer.style !== 'fixed' && (
+                                        {footer && layoutConfig.footer.display && layoutConfig.footer.position === 'below' && layoutConfig.footer.style !== 'fixed' && (
                                             footerTemplate
                                         )}
                                     </FuseScrollbars>
 
-                                    {layoutConfig.footer.display && layoutConfig.footer.position === 'below' && layoutConfig.footer.style === 'fixed' && (
+                                    {footer && layoutConfig.footer.display && layoutConfig.footer.position === 'below' && layoutConfig.footer.style === 'fixed' && (
                                         footerTemplate
                                     )}
 
@@ -477,7 +484,7 @@ class FuseLayout1 extends Component {
                                 )}
                             </div>
 
-                            {layoutConfig.footer.display && layoutConfig.footer.position === 'above' && (
+                            {footer && layoutConfig.footer.display && layoutConfig.footer.position === 'above' && (
                                 footerTemplate
                             )}
                         </div>

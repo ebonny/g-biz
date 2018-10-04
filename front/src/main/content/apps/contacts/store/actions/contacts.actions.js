@@ -20,7 +20,6 @@ export const SET_CONTACTS_STARRED = '[CONTACTS APP] SET CONTACTS STARRED ';
 
 export function getContacts(routeParams)
 {
-   debugger;
     const request = axios.get('/api/contacts-app/contacts', {
         params: routeParams
     });

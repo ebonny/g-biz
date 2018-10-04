@@ -3,11 +3,11 @@ import {Divider, Icon, IconButton, Input, ListItemIcon, ListItemText, Menu, Menu
 import * as UserActions from 'auth/store/actions';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
-import {FuseUtils,FuseAnimateGroup} from '@fuse';
+import {FuseUtils, FuseAnimateGroup} from '@fuse';
 import {Link} from 'react-router-dom';
 import amber from '@material-ui/core/colors/amber';
 import classNames from 'classnames';
-import _ from 'lodash';
+import _ from '@lodash';
 
 const propTypes = {};
 
@@ -70,9 +70,15 @@ class FuseShortcuts extends Component {
         this.setState({searchResults: null});
     };
 
+    toggleInShortcuts = (id) => {
+        let shortcuts = [...this.props.shortcuts];
+        shortcuts = shortcuts.includes(id) ? shortcuts.filter(_id => id !== _id) : [...shortcuts, id];
+        this.props.updateUserShortcuts(shortcuts);
+    };
+
     render()
     {
-        const {classes, shortcuts, navigation, toggleInShortcuts} = this.props;
+        const {classes, shortcuts, navigation} = this.props;
         const {addMenu, searchText, searchResults} = this.state;
         const shortcutItems = shortcuts ? shortcuts.map(id => FuseUtils.findById(navigation, id)) : [];
 
@@ -118,7 +124,7 @@ class FuseShortcuts extends Component {
                     {shortcutItems.map(item => item && (
                         <Link to={item.url} key={item.id} className={classes.item}>
                             <Tooltip title={item.title} placement="bottom">
-                                <IconButton className="w-40 h-40">
+                                <IconButton className="w-40 h-40 p-0">
                                     {item.icon ?
                                         (
                                             <Icon>{item.icon}</Icon>
@@ -134,7 +140,7 @@ class FuseShortcuts extends Component {
 
                     <Tooltip title="Click to add/remove shortcut" placement="bottom">
                         <IconButton
-                            className="w-40 h-40"
+                            className="w-40 h-40 p-0"
                             aria-owns={addMenu ? 'add-menu' : null}
                             aria-haspopup="true"
                             onClick={this.addMenuClick}
@@ -178,7 +184,7 @@ class FuseShortcuts extends Component {
                         <ShortcutMenuItem
                             key={item.id}
                             item={item}
-                            onToggle={() => toggleInShortcuts(item.id)}
+                            onToggle={() => this.toggleInShortcuts(item.id)}
                         />
                     ))}
 
@@ -190,7 +196,7 @@ class FuseShortcuts extends Component {
                         <ShortcutMenuItem
                             key={item.id}
                             item={item}
-                            onToggle={() => toggleInShortcuts(item.id)}
+                            onToggle={() => this.toggleInShortcuts(item.id)}
                         />
                     ))}
                 </Menu>
@@ -202,7 +208,7 @@ class FuseShortcuts extends Component {
 function mapDispatchToProps(dispatch)
 {
     return bindActionCreators({
-        toggleInShortcuts: UserActions.toggleInShortcuts
+        updateUserShortcuts: UserActions.updateUserShortcuts
     }, dispatch);
 }
 

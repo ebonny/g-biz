@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {withStyles} from '@material-ui/core/styles';
 import TodoList from './TodoList';
 import * as Actions from './store/actions';
 import {connect} from 'react-redux';
@@ -11,18 +10,7 @@ import TodoHeader from './TodoHeader';
 import TodoSidebarHeader from './TodoSidebarHeader';
 import TodoSidebarContent from './TodoSidebarContent';
 import TodoDialog from './TodoDialog';
-import _ from 'lodash';
-
-const styles = theme => ({
-    layoutContent: {
-        overflow     : 'hidden',
-        display      : 'flex',
-        flexDirection: 'column'
-    },
-    layoutHeader : {
-        alignItems: 'center'
-    }
-});
+import _ from '@lodash';
 
 class TodoApp extends Component {
 
@@ -41,14 +29,12 @@ class TodoApp extends Component {
 
     render()
     {
-        const {classes} = this.props;
-
         return (
             <React.Fragment>
                 <FusePageCarded
                     classes={{
-                        content: classes.layoutContent,
-                        header : classes.layoutHeader
+                        root  : "w-full",
+                        header : "items-center min-h-72 h-72 sm:h-136 sm:min-h-136"
                     }}
                     header={
                         <TodoHeader pageLayout={() => this.pageLayout}/>
@@ -89,4 +75,4 @@ function mapStateToProps({todoApp})
     return {}
 }
 
-export default withStyles(styles, {withTheme: true})(withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoApp)));
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(TodoApp));

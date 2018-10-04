@@ -3,10 +3,14 @@ import {Select, Button, Card, Divider, FormControl, Icon, MenuItem, Typography} 
 import {Doughnut} from 'react-chartjs-2';
 import {withStyles} from '@material-ui/core/styles/index';
 import classNames from 'classnames';
-import _ from 'lodash';
+import _ from '@lodash';
 
 const styles = theme => ({
-    root: {}
+    root: {
+        border   : '1px solid ' + theme.palette.divider,
+        boxShadow: 'none',
+        borderRadius: 8
+    }
 });
 
 class Widget7 extends Component {

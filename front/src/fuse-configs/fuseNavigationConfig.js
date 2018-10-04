@@ -1,5 +1,5 @@
 import {MaterialUINavigation} from 'main/content/components/material-ui/MaterialUINavigation';
-import {authRoles} from 'auth/auth';
+import {authRoles} from 'auth';
 
 export const fuseNavigationConfig = [
     {
@@ -30,11 +30,48 @@ export const fuseNavigationConfig = [
                 'url'  : '/apps/calendar'
             },
             {
+                'id'      : 'e-commerce',
+                'title'   : 'E-Commerce',
+                'type'    : 'collapse',
+                'icon'    : 'shopping_cart',
+                'url'     : '/apps/e-commerce',
+                'children': [
+                    {
+                        'id'   : 'e-commerce-products',
+                        'title': 'Products',
+                        'type' : 'item',
+                        'url'  : '/apps/e-commerce/products',
+                        'exact': true
+                    },
+                    {
+                        'id'   : 'e-commerce-product-detail',
+                        'title': 'Product Detail',
+                        'type' : 'item',
+                        'url'  : '/apps/e-commerce/products/1/printed-dress',
+                        'exact': true
+                    },
+                    {
+                        'id'   : 'e-commerce-orders',
+                        'title': 'Orders',
+                        'type' : 'item',
+                        'url'  : '/apps/e-commerce/orders',
+                        'exact': true
+                    },
+                    {
+                        'id'   : 'e-commerce-order-detail',
+                        'title': 'Order Detail',
+                        'type' : 'item',
+                        'url'  : '/apps/e-commerce/orders/1',
+                        'exact': true
+                    }
+                ]
+            },
+            {
                 'id'   : 'mail',
                 'title': 'Mail',
                 'type' : 'item',
                 'icon' : 'email',
-                'url'  : '/apps/mail/inbox',
+                'url'  : '/apps/mail',
                 'badge': {
                     'title': 25,
                     'bg'   : '#F44336',
@@ -46,7 +83,7 @@ export const fuseNavigationConfig = [
                 'title': 'To-Do',
                 'type' : 'item',
                 'icon' : 'check_box',
-                'url'  : '/apps/todo/all',
+                'url'  : '/apps/todo',
                 'badge': {
                     'title': 3,
                     'bg'   : 'rgb(255, 111, 0)',
@@ -66,6 +103,25 @@ export const fuseNavigationConfig = [
                 'type' : 'item',
                 'icon' : 'account_box',
                 'url'  : '/apps/contacts/all'
+            },
+            {
+                'id'   : 'chat',
+                'title': 'Chat',
+                'type' : 'item',
+                'icon' : 'chat',
+                'url'  : '/apps/chat',
+                'badge': {
+                    'title': 13,
+                    'bg'   : 'rgb(9, 210, 97)',
+                    'fg'   : '#FFFFFF'
+                }
+            },
+            {
+                'id'   : 'scrumboard',
+                'title': 'Scrumboard',
+                'type' : 'item',
+                'icon' : 'assessment',
+                'url'  : '/apps/scrumboard'
             }
         ]
     },
@@ -643,6 +699,13 @@ export const fuseNavigationConfig = [
                 'url'  : '/getting-started/working-with-fuse'
             },
             {
+                'id'   : 'project-structure-doc',
+                'title': 'Project Structure',
+                'type' : 'item',
+                'icon' : 'folder',
+                'url'  : '/getting-started/project-structure'
+            },
+            {
                 'id'   : 'settings',
                 'title': 'Settings',
                 'type' : 'item',
@@ -657,11 +720,24 @@ export const fuseNavigationConfig = [
                 'url'  : '/getting-started/routing'
             },
             {
-                'id'   : 'fuse-firebase-auth',
-                'title': 'Firebase Auth',
-                'type' : 'item',
-                'icon' : 'dns',
-                'url'  : '/getting-started/firebase-auth'
+                'id'      : 'authentication',
+                'title'   : 'Authentication',
+                'type'    : 'collapse',
+                'icon'    : 'lock',
+                'children': [
+                    {
+                        'id'   : 'firebase-auth',
+                        'title': 'Firebase',
+                        'type' : 'item',
+                        'url'  : '/getting-started/auth/firebase'
+                    },
+                    {
+                        'id'   : 'auth0-auth',
+                        'title': 'Auth0',
+                        'type' : 'item',
+                        'url'  : '/getting-started/auth/auth0'
+                    }
+                ]
             },
             {
                 'id'   : 'changelog',
@@ -682,14 +758,14 @@ export const fuseNavigationConfig = [
         'type'    : 'group',
         'icon'    : 'apps',
         'children': [
-            /*{
+            {
                 'id'   : 'login',
                 'title': 'Login',
                 'type' : 'item',
                 'url'  : '/login',
                 auth   : authRoles.onlyGuest,
                 'icon' : 'lock'
-            },*/
+            },
             {
                 'id'   : 'register',
                 'title': 'Register',

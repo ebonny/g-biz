@@ -24,7 +24,7 @@ View the full documentation at https://tailwindcss.com.
 |
 */
 
-let defaultConfig = require('tailwindcss/defaultConfig')()
+let defaultConfig = require('tailwindcss/defaultConfig')();
 
 
 /*
@@ -195,6 +195,7 @@ module.exports = {
 
     fonts: {
         'sans' : [
+            'Muli',
             'Roboto',
             '-apple-system',
             'BlinkMacSystemFont',
@@ -397,6 +398,26 @@ module.exports = {
 
     /*
     |-----------------------------------------------------------------------------
+    | Background sizes               https://tailwindcss.com/docs/background-size
+    |-----------------------------------------------------------------------------
+    |
+    | Here is where you define your background sizes. We provide some common
+    | values that are useful in most projects, but feel free to add other sizes
+    | that are specific to your project here as well.
+    |
+    | Class name: .bg-{size}
+    |
+    */
+
+    backgroundSize: {
+        'auto'   : 'auto',
+        'cover'  : 'cover',
+        'contain': 'contain'
+    },
+
+
+    /*
+    |-----------------------------------------------------------------------------
     | Border widths                     https://tailwindcss.com/docs/border-width
     |-----------------------------------------------------------------------------
     |
@@ -449,7 +470,7 @@ module.exports = {
     | utility.
     |
     | If your scale includes a `0` value to reset already rounded corners, it's
-    | a good idea to put it first so other values are able to override it.T
+    | a good idea to put it first so other values are able to override it.
     |
     | Class name: .rounded{-side?}{-size?}
     |
@@ -457,6 +478,16 @@ module.exports = {
 
     borderRadius: {
         'none' : '0',
+        '2'    : '.2rem',
+        '4'    : '.4rem',
+        '6'    : '.6rem',
+        '8'    : '.8rem',
+        '12'   : '1.2rem',
+        '16'   : '1.6rem',
+        '20'   : '2rem',
+        '24'   : '2.4rem',
+        '28'   : '2.8rem',
+        '32'   : '3.2rem',
         'sm'   : '.2rem',
         default: '.4rem',
         'lg'   : '.8rem',
@@ -485,10 +516,20 @@ module.exports = {
     */
 
     width: {
+        'xs'    : '32rem',
+        'sm'    : '48rem',
+        'md'    : '64rem',
+        'lg'    : '80rem',
+        'xl'    : '96rem',
+        '2xl'   : '112rem',
+        '3xl'   : '128rem',
+        '4xl'   : '144rem',
+        '5xl'   : '160rem',
         'auto'  : 'auto',
         'px'    : '1px',
         '0'     : '0',
         '4'     : '0.4rem',
+        '6'     : '0.6rem',
         '8'     : '0.8rem',
         '12'    : '1.2rem',
         '16'    : '1.6rem',
@@ -513,12 +554,17 @@ module.exports = {
         '92'    : '9.2rem',
         '96'    : '9.6rem',
         '128'   : '12.8rem',
+        '136'   : '13.6rem',
         '160'   : '16rem',
         '192'   : '19.2rem',
+        '200'   : '20rem',
+        '208'   : '20.8rem',
+        '216'   : '21.6rem',
         '224'   : '22.4rem',
         '256'   : '25.6rem',
         '288'   : '28.8rem',
         '320'   : '32rem',
+        '360'   : '36rem',
         '512'   : '51.2rem',
         '1/2'   : '50%',
         '1/3'   : '33.33333%',
@@ -555,6 +601,7 @@ module.exports = {
         'auto'  : 'auto',
         'px'    : '1px',
         '4'     : '0.4rem',
+        '6'     : '0.6rem',
         '8'     : '0.8rem',
         '12'    : '1.2rem',
         '16'    : '1.6rem',
@@ -579,12 +626,17 @@ module.exports = {
         '92'    : '9.2rem',
         '96'    : '9.6rem',
         '128'   : '12.8rem',
+        '136'   : '13.6rem',
         '160'   : '16rem',
         '192'   : '19.2rem',
+        '200'   : '20rem',
+        '208'   : '20.8rem',
+        '216'   : '21.6rem',
         '224'   : '22.4rem',
         '256'   : '25.6rem',
         '288'   : '28.8rem',
         '320'   : '32rem',
+        '360'   : '36rem',
         '512'   : '51.2rem',
         'full'  : '100%',
         'screen': '100vh'
@@ -606,10 +658,20 @@ module.exports = {
     */
 
     minWidth: {
+        'xs'    : '32rem',
+        'sm'    : '48rem',
+        'md'    : '64rem',
+        'lg'    : '80rem',
+        'xl'    : '96rem',
+        '2xl'   : '112rem',
+        '3xl'   : '128rem',
+        '4xl'   : '144rem',
+        '5xl'   : '160rem',
         'auto'  : 'auto',
         'px'    : '1px',
         '0'     : '0',
         '4'     : '0.4rem',
+        '6'     : '0.6rem',
         '8'     : '0.8rem',
         '12'    : '1.2rem',
         '16'    : '1.6rem',
@@ -634,12 +696,17 @@ module.exports = {
         '92'    : '9.2rem',
         '96'    : '9.6rem',
         '128'   : '12.8rem',
+        '136'   : '13.6rem',
         '160'   : '16rem',
         '192'   : '19.2rem',
+        '200'   : '20rem',
+        '208'   : '20.8rem',
+        '216'   : '21.6rem',
         '224'   : '22.4rem',
         '256'   : '25.6rem',
         '288'   : '28.8rem',
         '320'   : '32rem',
+        '360'   : '36rem',
         '512'   : '51.2rem',
         '1/2'   : '50%',
         '1/3'   : '33.33333%',
@@ -674,7 +741,9 @@ module.exports = {
     minHeight: {
         'auto'  : 'auto',
         'px'    : '1px',
+        '0'     : '0',
         '4'     : '0.4rem',
+        '6'     : '0.6rem',
         '8'     : '0.8rem',
         '12'    : '1.2rem',
         '16'    : '1.6rem',
@@ -699,12 +768,17 @@ module.exports = {
         '92'    : '9.2rem',
         '96'    : '9.6rem',
         '128'   : '12.8rem',
+        '136'   : '13.6rem',
         '160'   : '16rem',
         '192'   : '19.2rem',
+        '200'   : '20rem',
+        '208'   : '20.8rem',
+        '216'   : '21.6rem',
         '224'   : '22.4rem',
         '256'   : '25.6rem',
         '288'   : '28.8rem',
         '320'   : '32rem',
+        '360'   : '36rem',
         '512'   : '51.2rem',
         'full'  : '100%',
         'screen': '100vh'
@@ -727,6 +801,7 @@ module.exports = {
     */
 
     maxWidth: {
+        'none': 'none',
         'xs'  : '32rem',
         'sm'  : '48rem',
         'md'  : '64rem',
@@ -738,6 +813,7 @@ module.exports = {
         '5xl' : '160rem',
         'full': '100%',
         '4'   : '0.4rem',
+        '6'   : '0.6rem',
         '8'   : '0.8rem',
         '12'  : '1.2rem',
         '16'  : '1.6rem',
@@ -755,12 +831,17 @@ module.exports = {
         '64'  : '6.4rem',
         '96'  : '9.6rem',
         '128' : '12.8rem',
+        '136' : '13.6rem',
         '160' : '16rem',
         '192' : '19.2rem',
+        '200' : '20rem',
+        '208' : '20.8rem',
+        '216' : '21.6rem',
         '224' : '22.4rem',
         '256' : '25.6rem',
         '288' : '28.8rem',
         '320' : '32rem',
+        '360' : '36rem',
         '512' : '51.2rem'
     },
 
@@ -783,6 +864,7 @@ module.exports = {
         'full'  : '100%',
         'screen': '100vh',
         '4'     : '0.4rem',
+        '6'     : '0.6rem',
         '8'     : '0.8rem',
         '12'    : '1.2rem',
         '16'    : '1.6rem',
@@ -807,12 +889,17 @@ module.exports = {
         '92'    : '9.2rem',
         '96'    : '9.6rem',
         '128'   : '12.8rem',
+        '136'   : '13.6rem',
         '160'   : '16rem',
         '192'   : '19.2rem',
+        '200'   : '20rem',
+        '208'   : '20.8rem',
+        '216'   : '21.6rem',
         '224'   : '22.4rem',
         '256'   : '25.6rem',
         '288'   : '28.8rem',
         '320'   : '32rem',
+        '360'   : '36rem',
         '512'   : '51.2rem'
     },
 
@@ -836,6 +923,7 @@ module.exports = {
         'px' : '1px',
         '0'  : '0',
         '4'  : '0.4rem',
+        '6'  : '0.6rem',
         '8'  : '0.8rem',
         '12' : '1.2rem',
         '16' : '1.6rem',
@@ -887,6 +975,7 @@ module.exports = {
         'px'  : '1px',
         '0'   : '0',
         '4'   : '0.4rem',
+        '6'   : '0.6rem',
         '8'   : '0.8rem',
         '12'  : '1.2rem',
         '16'  : '1.6rem',
@@ -937,6 +1026,7 @@ module.exports = {
         'px' : '1px',
         '0'  : '0',
         '4'  : '0.4rem',
+        '6'  : '0.6rem',
         '8'  : '0.8rem',
         '12' : '1.2rem',
         '16' : '1.6rem',
@@ -1013,7 +1103,10 @@ module.exports = {
         '20'  : 20,
         '30'  : 30,
         '40'  : 40,
-        '50'  : 50
+        '50'  : 50,
+        '99'  : 99,
+        '999' : 999,
+        '9999': 9999
     },
 
 
@@ -1085,7 +1178,12 @@ module.exports = {
     | Here is where you control which modules are generated and what variants are
     | generated for each of those modules.
     |
-    | Currently supported variants: 'responsive', 'hover', 'focus'
+    | Currently supported variants:
+    |   - responsive
+    |   - hover
+    |   - focus
+    |   - active
+    |   - group-hover
     |
     | To disable a module completely, use `false` instead of an array.
     |
@@ -1094,20 +1192,21 @@ module.exports = {
     modules: {
         appearance          : ['responsive'],
         backgroundAttachment: ['responsive'],
-        backgroundColors    : ['responsive', 'hover'],
+        backgroundColors    : ['responsive', 'hover', 'focus'],
         backgroundPosition  : ['responsive'],
         backgroundRepeat    : ['responsive'],
         backgroundSize      : ['responsive'],
-        borderColors        : ['responsive', 'hover'],
+        borderCollapse      : [],
+        borderColors        : ['responsive', 'hover', 'focus'],
         borderRadius        : ['responsive'],
         borderStyle         : ['responsive'],
         borderWidths        : ['responsive'],
         cursor              : ['responsive'],
-        display             : ['responsive'],
+        display             : ['responsive', 'hover', 'focus'],
         flexbox             : ['responsive'],
         float               : ['responsive'],
         fonts               : ['responsive'],
-        fontWeights         : ['responsive', 'hover'],
+        fontWeights         : ['responsive', 'hover', 'focus'],
         height              : ['responsive'],
         leading             : ['responsive'],
         lists               : ['responsive'],
@@ -1118,18 +1217,20 @@ module.exports = {
         minWidth            : ['responsive'],
         negativeMargin      : ['responsive'],
         opacity             : ['responsive'],
+        outline             : ['focus'],
         overflow            : ['responsive'],
         padding             : ['responsive'],
         pointerEvents       : ['responsive'],
         position            : ['responsive'],
         resize              : ['responsive'],
-        shadows             : ['responsive'],
+        shadows             : ['responsive', 'hover', 'focus'],
         svgFill             : [],
         svgStroke           : [],
+        tableLayout         : ['responsive'],
         textAlign           : ['responsive'],
-        textColors          : ['responsive', 'hover'],
+        textColors          : ['responsive', 'hover', 'focus'],
         textSizes           : ['responsive'],
-        textStyle           : ['responsive', 'hover'],
+        textStyle           : ['responsive', 'hover', 'focus'],
         tracking            : ['responsive'],
         userSelect          : ['responsive'],
         verticalAlign       : ['responsive'],
@@ -1139,6 +1240,22 @@ module.exports = {
         zIndex              : ['responsive']
     },
 
+
+    /*
+    |-----------------------------------------------------------------------------
+    | Plugins                                https://tailwindcss.com/docs/plugins
+    |-----------------------------------------------------------------------------
+    |
+    | Here is where you can register any plugins you'd like to use in your
+    | project. Tailwind's built-in `container` plugin is enabled by default to
+    | give you a Bootstrap-style responsive container component out of the box.
+    |
+    | Be sure to view the complete plugin documentation to learn more about how
+    | the plugin system works.
+    |
+    */
+
+    plugins: [],
 
     /*
     |-----------------------------------------------------------------------------

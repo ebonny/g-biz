@@ -55,7 +55,7 @@ const styles = theme => ({
         height         : headerHeight,
         minHeight      : headerHeight,
         display        : 'flex',
-        backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
+        // backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
         backgroundColor: theme.palette.primary.dark,
         color          : theme.palette.primary.contrastText,
         backgroundSize : 'cover'
@@ -78,15 +78,19 @@ const styles = theme => ({
         '-webkit-overflow-scrolling': 'touch',
         '&.ps'                      : {
             overflow: 'hidden!important'
+        },
+        '& $contentCard'            : {
+            borderRadius: 8
         }
     },
     contentCard                   : {
         display                     : 'flex',
         flexDirection               : 'column',
         flex                        : '1 1 auto',
-        boxShadow                   : theme.shadows[5],
+        boxShadow                   : theme.shadows[1],
         overflow                    : 'auto',
-        '-webkit-overflow-scrolling': 'touch'
+        '-webkit-overflow-scrolling': 'touch',
+        zIndex                      : 9999
     },
     toolbar                       : {
         height         : toolbarHeight,
@@ -100,6 +104,7 @@ const styles = theme => ({
         flex: '1 0 auto'
     },
     sidebarWrapper                : {
+        overflow       : 'hidden',
         backgroundColor: 'transparent',
         position       : 'absolute',
         '&.permanent'  : {
@@ -248,9 +253,11 @@ class FusePageSimple extends React.Component {
 
         const headerContent = (
             <div className={classes.header}>
-                <MuiThemeProvider theme={FuseThemes['mainThemeDark']}>
-                    {header}
-                </MuiThemeProvider>
+                {header && (
+                    <MuiThemeProvider theme={FuseThemes['mainThemeDark']}>
+                        {header}
+                    </MuiThemeProvider>
+                )}
             </div>
         );
 

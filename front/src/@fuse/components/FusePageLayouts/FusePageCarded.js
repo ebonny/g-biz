@@ -47,7 +47,7 @@ const styles = theme => ({
         right          : 0,
         top            : 0,
         height         : headerHeight,
-        backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
+        // backgroundImage: 'url("../../assets/images/backgrounds/header-bg.png")',
         backgroundColor: theme.palette.primary.dark,
         backgroundSize : 'cover',
         pointerEvents  : 'none'
@@ -80,8 +80,9 @@ const styles = theme => ({
         flex           : '1 1 100%',
         flexDirection  : 'column',
         backgroundColor: theme.palette.background.paper,
-        boxShadow      : theme.shadows[7],
-        minHeight      : 0
+        boxShadow      : theme.shadows[1],
+        minHeight      : 0,
+        borderRadius   : '8px 8px 0 0'
     },
     toolbar                  : {
         height      : toolbarHeight,
@@ -92,6 +93,7 @@ const styles = theme => ({
     },
     content                  : {
         flex                        : '1 1 auto',
+        height                      : '100%',
         overflow                    : 'auto',
         '-webkit-overflow-scrolling': 'touch'
     },
@@ -99,6 +101,7 @@ const styles = theme => ({
         position       : 'absolute',
         backgroundColor: 'transparent',
         zIndex         : 5,
+        overflow       : 'hidden',
         '&.permanent'  : {
             [theme.breakpoints.up('lg')]: {
                 zIndex  : 1,
@@ -264,9 +267,11 @@ class FusePageCarded extends React.Component {
                     className={classNames(classes.contentWrapper, isLeftSidebar && (leftSidebarVariant === undefined || leftSidebarVariant === 'permanent') && 'lg:pl-0', isRightSidebar && (rightSidebarVariant === undefined || rightSidebarVariant === 'permanent') && 'lg:pr-0')}
                 >
                     <div className={classes.header}>
-                        <MuiThemeProvider theme={FuseThemes['mainThemeDark']}>
-                            {header}
-                        </MuiThemeProvider>
+                        {header && (
+                            <MuiThemeProvider theme={FuseThemes['mainThemeDark']}>
+                                {header}
+                            </MuiThemeProvider>
+                        )}
                     </div>
 
                     <div className={classNames(classes.contentCard, innerScroll && 'inner-scroll')}>

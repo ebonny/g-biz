@@ -1,7 +1,7 @@
 import {withFormsy} from 'formsy-react';
 import React, {Component} from 'react';
 import {FormControl, FormHelperText, Input, InputLabel, Select} from '@material-ui/core';
-import _ from 'lodash';
+import _ from '@lodash';
 
 class SelectFormsy extends Component {
 
@@ -27,7 +27,8 @@ class SelectFormsy extends Component {
             'open',
             'renderValue',
             'SelectDisplayProps',
-            'value'
+            'value',
+            'variant'
         ]);
 
         // An error message is returned only if the component is invalid
